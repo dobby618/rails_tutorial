@@ -12,7 +12,8 @@ User.create!(
   email: 'example@railstutorial.org',
   password: 'foobar',
   password_confirmation: 'foobar',
-  admin: true
+  admin: true,
+  activated_at: Time.current
 )
 
 # 追加のユーザをまとめて生成する
@@ -24,6 +25,8 @@ User.create!(
     name: name,
     email: email,
     password: password,
-    password_confirmation: password
+    password_confirmation: password,
+    activated: true,
+    activated_at: Time.current
   )
 end
