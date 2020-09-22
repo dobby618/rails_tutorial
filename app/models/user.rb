@@ -1,5 +1,8 @@
 class User < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
+
+  has_many :microposts, dependent: :destroy
+
   before_save { email.downcase! }
   before_create :create_activation_digest
 
@@ -70,6 +73,10 @@ class User < ApplicationRecord
   # ユーザのログイン情報を破棄する
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  def feed
+    Micropost.where('user_id = ?', id)
   end
 
   private

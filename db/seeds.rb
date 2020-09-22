@@ -13,6 +13,7 @@ User.create!(
   password: 'foobar',
   password_confirmation: 'foobar',
   admin: true,
+  activated: true,
   activated_at: Time.current
 )
 
@@ -29,4 +30,10 @@ User.create!(
     activated: true,
     activated_at: Time.current
   )
+end
+
+users = User.order(:created_at).take(6)
+50.times do
+  content = Faker::Lorem.sentence(word_count: 5)
+  users.each { |user| user.microposts.create!(content: content) }
 end
